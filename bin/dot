@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+"""
+Dot: manage you dotfiles from the command line
+
+Usage: dot <command> [<args>...]
+  dot                     Run dot
+  dot init                Initialize dot dir
+  dot add <name> <path>   Add a new reference <name> indentified by <path>
+  dot rm <name>           Remove a reference indentified by <name>
+  dot list                Display all added references
+
+Options:
+  -h --help               Show this screen
+"""
+from docopt import docopt
+
+try:
+    from dot import main
+except ImportError:
+    from ..dot import main
+
+if __name__ == "__main__":
+    args = docopt(__doc__, version='Dot 0.0.1')
+
+    cmd         = args['<command>']
+    cmd_args    = args['<args>']
+
+    main.run_command(cmd, cmd_args)
