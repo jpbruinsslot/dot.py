@@ -10,7 +10,6 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
 lib/
 lib64/
 parts/
