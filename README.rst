@@ -2,6 +2,9 @@
 Dot - Simple Dotfiles Tracking
 ******************************
 
+.. image:: https://circleci.com/gh/erroneousboat/dot.svg?style=shield
+    :target: https://circleci.com/gh/erroneousboat/dot
+
 Beta
 ====
 Take note that this project is still in its infancy and is, at the moment, mainly as a personal project. If you want to know when the project receives updates than give it a star or watch.
