@@ -2,6 +2,8 @@
 Dot - Contributing
 ******************
 
+[![Circle CI](https://circleci.com/gh/erroneousboat/dot/tree/master.svg?style=shield)](https://circleci.com/gh/erroneousboat/dot/tree/master)
+
 Introduction
 ============
 If you want to help with the development of this application then that would be
