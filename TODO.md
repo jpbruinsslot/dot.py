@@ -1,5 +1,7 @@
 # TODO
 
-- [ ] finish todo tests
+- [x] setup circleci
 
-- [ ] setup circleci
+- [ ] let circleci create distribution file
+
+- [ ] finish todo tests
