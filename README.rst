@@ -42,6 +42,31 @@ command.
 For further instructions on how to set up a git repository refer to the git
 documentation.
 
+Initializing dot
+----------------
+
+Execute the command:
+
+    $ dot init
+
+This will create 2 folders the ``files`` and the ``backup`` folder. The 
+``files`` folder will hold all your dot files and the ``backup`` will hold all
+the files that were already present on other machines. (See section: Other 
+machines)
+
+So first we will track dot's own config file ``~/.dotconfig`` and we do this by
+issuing the following command:
+
+    $ dot dotconfig ~/.dotconfig
+
+This will put the ``~/.dotconfig`` file in the files folder and will create a
+symlink that will point to ``~/dotfiles/files/dotconfig/.dotconfig``
+
+Now we want to push it to our git repository:
+
+    $ git commit -am "Added dotconfig file"
+    $ git push origin master
+
 Tracking files/folders
 ----------------------
 To track a file or folder simply use the following command:
