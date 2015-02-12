@@ -14,3 +14,6 @@
       result in a symlinking of these files
 
 - [ ] change README.rst to README.md
+
+- [ ] dotconfig also tracks username, on other machine one could have a
+      different username, it should be able to handle this
