@@ -13,7 +13,7 @@ setup(
     author='erroneousboat',
     author_email='erroneousboat@gmail.com',
     url='http://www.erroneousboat.com',
-    version='0.1b0',
+    version='0.1b1',
     license='MIT',
     install_requires=['nose', 'docopt'],
     packages=['dot'],
