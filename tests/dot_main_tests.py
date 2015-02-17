@@ -29,7 +29,7 @@ class TestCaseMain():
         self.dotconfig_tracking = """
         {
             "files" : { "testfile": "path/to/testfile"},
-            "dot_path" : "path/to/dotfiles/location"
+            "dot_path" : "/path/to/dotfiles/location"
         }
         """
 
@@ -95,7 +95,7 @@ class TestCaseMain():
         notice to the user.
         """
         mock_create_config_file.return_value = True
-        mock_set_dot_path.return_value = True
+        mock_set_dot_path.return_value = os.getcwd()
         mock_exists.return_value = True
 
         main.run_command("init", "")

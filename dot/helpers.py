@@ -126,7 +126,7 @@ def get_dot_path():
     if not data['dot_path']:
         sys.exit(colors.yellow("[ERROR]") + " path not found in config file")
 
-    return data['dot_path']
+    return (os.path.expanduser("~") + data['dot_path'])
 
 
 def set_dot_path(path):
