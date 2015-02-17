@@ -91,7 +91,8 @@ def init():
         return dotconfig
 
     current_directory = os.getcwd()
-    helpers.set_dot_path(current_directory)
+    helpers.set_dot_path(
+        current_directory.replace(os.path.expanduser("~"), ""))
 
     if not os.path.exists("backup"):
         print colors.blue("[NOTICE]") + " creating backup folder"

@@ -29,7 +29,7 @@ class TestCaseHelpers():
         self.dotconfig_tracking = """
         {
             "files" : { "testfile": "path/to/testfile"},
-            "dot_path" : "path/to/dotfiles/location"
+            "dot_path" : "/path/to/dotfiles/location"
         }
         """
 
@@ -255,7 +255,9 @@ class TestCaseHelpers():
         """
         data = json.loads(self.dotconfig_tracking)
         mock_get_dotconfig.return_value = data
-        assert_equal(helpers.get_dot_path(), "path/to/dotfiles/location")
+        assert_equal(
+            helpers.get_dot_path(),
+            os.path.expanduser("~") + "/path/to/dotfiles/location")
 
     @patch('dot.helpers.get_dotconfig')
     def test_get_dot_path_empty(self, mock_get_dotconfig):
