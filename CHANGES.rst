@@ -2,6 +2,10 @@
 Release History
 #####################
 
+0.1b12 (2015-02-17)
+=======================
+* Fixed dotpath to support multiple usernames on multiple machines
+
 0.1b1 (2015-02-17)
 =======================
 * Added functionality for tracking files without the notion of a specific
