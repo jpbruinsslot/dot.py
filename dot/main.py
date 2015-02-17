@@ -45,7 +45,7 @@ def run():
             colors.green(" Creating references for: %s " % key) + \
             colors.red("***")
 
-        origin = os.path.expanduser(value)
+        origin = os.path.expanduser('~') + value
 
         if not os.path.exists(origin):
             print colors.blue("[NOTICE]") + \
@@ -120,6 +120,7 @@ def add(args):
 
     name = args[0]
     path = args[1]
+    path_without_home_prefix = path.replace(os.path.expanduser('~'), "")
 
     if not os.path.exists(path):
         sys.exit(colors.red("[ERROR]") + " file does not exist or file path"
@@ -127,19 +128,18 @@ def add(args):
 
     data = helpers.get_dotconfig()
 
-    for k, v in data['files'].iteritems():
-        if path == v:
+    if path in data['files'].values():
             sys.exit(
                 colors.blue("[NOTICE]") +
-                            "the file %s is already being tracked" % path)
+                "the file %s is already being tracked" % path)
 
-    data['files'].update({name: path})
+    data['files'].update({name: path_without_home_prefix})
 
     helpers.set_dotconfig(data)
 
     print colors.blue("[NOTICE]") + \
-                      " %s added to the .dotconfig file, run 'dot' to symlink\
-                       the files" % name
+        " %s added to the .dotconfig file, run 'dot' to symlink the files" \
+        % name
 
 
 def remove(args):
@@ -152,7 +152,7 @@ def remove(args):
     name = args[0]
     data = helpers.get_dotconfig()
 
-    dst = data['files'][name]
+    dst = os.path.expanduser('~') + data['files'][name]
     src_dir = helpers.get_dot_path() + "/files/" + name + "/"
     src = helpers.get_dot_path() + "/files/" + name + "/" + os.path.basename(dst)
 
@@ -169,8 +169,8 @@ def remove(args):
         del data['files'][name]
     else:
         sys.exit(colors.yellow("[ERROR]") +
-            " not able to find file in .dotconfig. Use 'dot list' to see the"
-            " files")
+                 " not able to find file in .dotconfig. Use 'dot list' to see "
+                 "the files")
 
     helpers.set_dotconfig(data)
 
