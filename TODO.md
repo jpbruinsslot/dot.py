@@ -2,6 +2,9 @@
 
 - [x] setup circleci
 
+- [x] dotconfig also tracks username, on other machine one could have a
+      different username, it should be able to handle this
+
 - [ ] let circleci create distribution file
 
 - [ ] finish todo tests
@@ -14,6 +17,3 @@
       result in a symlinking of these files
 
 - [ ] change README.rst to README.md
-
-- [ ] dotconfig also tracks username, on other machine one could have a
-      different username, it should be able to handle this
