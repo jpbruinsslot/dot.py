@@ -7,7 +7,9 @@ Dot - Simple Dotfiles Tracking
 
 Beta
 ====
-Take note that this project is still in its infancy and is, at the moment, mainly as a personal project. If you want to know when the project receives updates than give it a star or watch.
+Take note that this project is still in its infancy and is, at the moment, 
+mainly as a personal project. If you want to know when the project receives 
+updates then give it a star or watch.
 
 Manual
 ======
