@@ -2,8 +2,6 @@
 Dot - Contributing
 ******************
 
-[![Circle CI](https://circleci.com/gh/erroneousboat/dot/tree/master.svg?style=shield)](https://circleci.com/gh/erroneousboat/dot/tree/master)
-
 Introduction
 ============
 If you want to help with the development of this application then that would be
@@ -39,6 +37,12 @@ runner, just type in this command:
 If you want the check the code coverage of the module, then do that with the 
 following:
     $ nosetests --with-coverage --cover-erase
+
+Release
+=======
+To create a release, change version number in setup.py and issue the following
+command:
+    $ python setup.py sdist
 
 When you're done
 ================
