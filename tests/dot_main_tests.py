@@ -69,8 +69,8 @@ class TestCaseMain():
         with assert_raises(SystemExit):
             main.run_command("Warp 8", "Engage!")
 
-    @patch('os.path.exists')
-    def test_command_run(self, mock_exists):
+    @patch('dot.helpers.get_dot_path')
+    def test_command_run(self, mock_get_dot_path):
         """
         Test command 'run'
 
@@ -78,7 +78,7 @@ class TestCaseMain():
         method and because we don't have a backup folder it should raise a
         system
         """
-        mock_exists.return_value = False
+        mock_get_dot_path.return_value = ""
         with assert_raises(SystemExit) as cm:
             main.run_command(None, None)
         assert_in("no backup and/or files folder found", cm.exception.args[0])
@@ -216,16 +216,16 @@ class TestCaseMain():
 
         assert_true(main.run())
 
-    @patch('os.path.exists')
+    @patch('dot.helpers.get_dot_path')
     def test_command_run_missing_backup_and_files_folder(
-            self, mock_exists):
+            self, mock_get_dot_path):
         """
         Test command 'run' when backup folder is missing
 
         When running the run command and the backup folder is missing, it
         should raise a SystemExit and display a message.
         """
-        mock_exists.return_value = False
+        mock_get_dot_path.return_value = ""
 
         with assert_raises(SystemExit) as cm:
             main.run()

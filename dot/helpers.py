@@ -62,10 +62,8 @@ def check_backup_and_files_folders():
     """
     Check if the backup and files folders are present
     """
-    dot_path = os.path.expanduser('~') + get_dotconfig()["dot_path"]
-
-    if not os.path.exists(dot_path + "/backup") or \
-            not os.path.exists(dot_path + "/files"):
+    if not os.path.exists(get_dot_path() + "/backup") or \
+            not os.path.exists(get_dot_path() + "/files"):
         sys.exit(colors.blue("[NOTICE]") +
                  " no backup and/or files folder found, please run the"
                  " command 'dot init'")
