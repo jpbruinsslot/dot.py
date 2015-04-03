@@ -117,6 +117,33 @@ class TestCaseHelpers():
             helpers.make_and_move_to_dir(origin, new_dir)
         assert_in("not able to find file", cm.exception.args[0])
 
+    def test_make_and_move_to_dir_file_present(self):
+        """
+        Test make_and_move_to_dir() when the file is already present
+
+        When trying to move a file to a dir and the file already exists in
+        that dir it should let the user know
+        """
+        # create file to be moved
+        tempdir = tempfile.mkdtemp()
+        os.chdir(tempdir)
+
+        origin = open('testfile', 'w')
+        origin.close()
+
+        # create same file in destination folder
+        new_dir = tempfile.mkdtemp()
+        os.chdir(new_dir)
+        duplicate_file = open('testfile', 'w')
+        duplicate_file.close()
+
+        # try to move the origin to the destination folder
+        with assert_raises(SystemExit) as cm:
+            helpers.make_and_move_to_dir('testfile', new_dir)
+            assert_in("already present", cm.exception.args[0])
+
+        shutil.rmtree(tempdir)
+
     def test_create_symlink(self):
         """
         Test create_symlink()

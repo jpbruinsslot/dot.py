@@ -22,6 +22,9 @@ def make_and_move_to_dir(origin, new_dir):
         shutil.move(origin, new_dir)
     except IOError:
         sys.exit(colors.yellow("[ERROR]") + " not able to find file")
+    except shutil.Error:
+        sys.exit(colors.yellow("[ERROR]") + " %s already present in %s. "
+                 "Please remove the file." % (origin, new_dir))
 
 
 def create_symlink(origin, new_dir):
