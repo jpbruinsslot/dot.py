@@ -29,13 +29,7 @@ def run():
     """
     Main function that will run the script
     """
-    if not os.path.exists("backup"):
-        sys.exit(colors.blue("[NOTICE]") +
-                 " no backup folder found, please run the command 'dot init'")
-
-    if not os.path.exists("files"):
-        sys.exit(colors.blue("[NOTICE]") +
-                 " no files folder found, please run the command 'dot init'")
+    helpers.check_backup_and_files_folders()
 
     data = helpers.get_dotconfig()
 

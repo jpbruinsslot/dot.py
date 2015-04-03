@@ -22,6 +22,9 @@ def make_and_move_to_dir(origin, new_dir):
         shutil.move(origin, new_dir)
     except IOError:
         sys.exit(colors.yellow("[ERROR]") + " not able to find file")
+    except shutil.Error:
+        sys.exit(colors.yellow("[ERROR]") + " %s already present in %s. "
+                 "Please remove the file." % (origin, new_dir))
 
 
 def create_symlink(origin, new_dir):
@@ -55,6 +58,19 @@ def check_args(args, expected):
         return True
 
 
+def check_backup_and_files_folders():
+    """
+    Check if the backup and files folders are present
+    """
+    if not os.path.exists(get_dot_path() + "/backup") or \
+            not os.path.exists(get_dot_path() + "/files"):
+        sys.exit(colors.blue("[NOTICE]") +
+                 " no backup and/or files folder found, please run the"
+                 " command 'dot init'")
+    else:
+        return True
+
+
 def create_config_file():
     """
     Creates the config file in the home folder
@@ -76,7 +92,8 @@ def create_config_file():
             dotconfig.close()
             return True
         except IOError:
-            sys.exit(colors.yellow("[ERROR]") + " not able to write to data file")
+            sys.exit(
+                colors.yellow("[ERROR]") + " not able to write to data file")
     else:
         return True
 

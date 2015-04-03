@@ -69,7 +69,8 @@ class TestCaseMain():
         with assert_raises(SystemExit):
             main.run_command("Warp 8", "Engage!")
 
-    def test_command_run(self):
+    @patch('dot.helpers.get_dot_path')
+    def test_command_run(self, mock_get_dot_path):
         """
         Test command 'run'
 
@@ -77,9 +78,10 @@ class TestCaseMain():
         method and because we don't have a backup folder it should raise a
         system
         """
+        mock_get_dot_path.return_value = ""
         with assert_raises(SystemExit) as cm:
             main.run_command(None, None)
-        assert_in("no backup folder found", cm.exception.args[0])
+        assert_in("no backup and/or files folder found", cm.exception.args[0])
 
     @patch('os.getcwd')
     @patch('os.path.exists')
@@ -192,69 +194,42 @@ class TestCaseMain():
         """
         pass
 
-    @patch('os.path.expanduser')
+    @patch('dot.helpers.check_backup_and_files_folders')
     @patch('dot.helpers.get_dotconfig')
     @patch('dot.helpers.make_and_move_to_dir')
     @patch('dot.helpers.create_symlink')
-    def test_command_run_from_main(self, mock_expanduser,
+    def test_command_run_from_main(self,
+                                   mock_get_backup_and_files_folders,
                                    mock_get_dotconfig,
                                    mock_make_and_move_dir,
                                    mock_create_symlink):
         """
-        TODO: not yet working
-
         Test command 'run' from main.py
 
         Running the run command (with path exists) should print out the notice
         that it's backing up files in the backup folder
         """
-        tempdir = tempfile.mkdtemp()
-        origin = tempfile.NamedTemporaryFile()
-        os.chdir(tempdir)
-        os.mkdir("backup")
-        os.mkdir("files")
+        mock_get_backup_and_files_folders.return_value = True
 
         data = json.loads(self.dotconfig_tracking)
         mock_get_dotconfig.return_value = data
 
-        mock_expanduser.return_value = os.path.expanduser(origin.name)
-
         assert_true(main.run())
 
-        shutil.rmtree(tempdir)
-
-    def test_command_run_missing_backup_folder(self):
+    @patch('dot.helpers.get_dot_path')
+    def test_command_run_missing_backup_and_files_folder(
+            self, mock_get_dot_path):
         """
         Test command 'run' when backup folder is missing
 
         When running the run command and the backup folder is missing, it
         should raise a SystemExit and display a message.
         """
-        tempdir = tempfile.mkdtemp()
-        os.chdir(tempdir)
+        mock_get_dot_path.return_value = ""
 
         with assert_raises(SystemExit) as cm:
             main.run()
-        assert_in("no backup folder found", cm.exception.args[0])
-
-        shutil.rmtree(tempdir)
-
-    def test_command_run_missing_files_folder(self):
-        """
-        Test command 'run' when files folder is missing
-
-        When running the run command and the files folder is missing, it
-        should raise a SystemExit and display a message.
-        """
-        tempdir = tempfile.mkdtemp()
-        os.chdir(tempdir)
-        os.mkdir("backup")
-
-        with assert_raises(SystemExit) as cm:
-            main.run()
-        assert_in("no files folder found", cm.exception.args[0])
-
-        shutil.rmtree(tempdir)
+        assert_in("no backup and/or files folder found", cm.exception.args[0])
 
     @patch('dot.helpers.get_dotconfig')
     def test_command_list_tracked_files(self, mock_get_dotconfig):
