@@ -224,7 +224,7 @@ class TestCaseHelpers():
 
     def test_get_dotconfig_no_data_file(self):
         """
-        Test get_dotconfig() when there is no donfig file
+        Test get_dotconfig() when there is no config file
 
         When there is no dotconfig file it should raise a SystemExit and
         display an error message
