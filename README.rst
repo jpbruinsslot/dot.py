@@ -1,9 +1,10 @@
 ******************************
-Dot - Simple Dotfiles Tracking
+DISCONTINUED
 ******************************
 
-.. image:: https://circleci.com/gh/erroneousboat/dot.svg?style=shield
-    :target: https://circleci.com/gh/erroneousboat/dot
+This project has been discontinued in favour of its successor:
+
+`dot - simple dotfiles tracking <https://github.com/erroneousboat/dot>`_
 
 Beta
 ====
